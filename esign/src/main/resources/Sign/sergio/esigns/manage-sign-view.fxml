@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<BorderPane prefHeight="900.0" prefWidth="1200.0" style="-fx-background-color: #f5f5f5;" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sign.sergio.esigns.controller.ManageSignatureController">
+
+	<!-- Header Section -->
+	<top>
+		<VBox style="-fx-background-color: #2c3e50; -fx-padding: 20;">
+			<Label text="Signature Management System" textFill="white" style="-fx-font-size: 24px; -fx-font-weight: bold;" />
+			<Label text="Manage and track digital signatures efficiently" textFill="#bdc3c7" style="-fx-font-size: 14px;" />
+		</VBox>
+	</top>
+
+	<!-- Main Content Area -->
+	<center>
+		<HBox spacing="20.0" style="-fx-padding: 20;" VBox.vgrow="ALWAYS">
+
+			<!-- Left Panel - Signature List -->
+			<VBox prefWidth="400.0"  HBox.hgrow="ALWAYS" style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+				<padding>
+					<Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+				</padding>
+
+				<!-- Search Bar -->
+				<HBox spacing="10.0" alignment="CENTER_LEFT">
+					<TextField fx:id="txtSearch" promptText="Search signatures..." prefWidth="300.0" style="-fx-background-radius: 25; -fx-padding: 8 15; -fx-border-color: #ddd; -fx-border-radius: 25;" />
+					<Button text="🔍" style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 20; -fx-padding: 8 12;" />
+				</HBox>
+
+				<Separator style="-fx-padding: 10 0;" />
+
+				<!-- Signature List -->
+				<Label text="Signatures" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;">
+					<VBox.margin>
+						<Insets bottom="10.0" />
+					</VBox.margin>
+				</Label>
+
+				<ListView fx:id="lvEcommerces" onMouseClicked="#onAction" prefHeight="400.0" style="-fx-background-color: transparent; -fx-background-radius: 8; -fx-border-color: #ecf0f1; -fx-border-radius: 8;">
+					<VBox.margin>
+						<Insets bottom="15.0" />
+					</VBox.margin>
+				</ListView>
+
+				<!-- Action Buttons -->
+				<HBox spacing="10.0" alignment="CENTER">
+					<Button fx:id="btnCreate" mnemonicParsing="false" onAction="#onCreate" text="+ New Signature"
+							style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20; -fx-font-weight: bold;" />
+					<Button fx:id="btnEdit" mnemonicParsing="false" onAction="#onEdit" text="✏ Edit"
+							style="-fx-background-color: #f39c12; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20;" />
+					<Button fx:id="btnDelete" mnemonicParsing="false" onAction="#onDelete" text="🗑 Delete"
+							style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20;" />
+				</HBox>
+			</VBox>
+
+			<!-- Right Panel - Signature Details -->
+			<VBox prefWidth="700.0" spacing="20.0" VBox.vgrow="ALWAYS" HBox.hgrow="ALWAYS">
+
+				<!-- Details Card -->
+				<VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+					<padding>
+						<Insets bottom="25.0" left="25.0" right="25.0" top="25.0" />
+					</padding>
+
+					<Label text="Signature Details" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;">
+						<VBox.margin>
+							<Insets bottom="20.0" />
+						</VBox.margin>
+					</Label>
+
+					<!-- Form Fields in Grid -->
+					<GridPane hgap="20.0" vgap="15.0">
+						<columnConstraints>
+							<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+							<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+							<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="150.0" />
+							<ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="300.0" />
+						</columnConstraints>
+
+						<!-- Row 1 -->
+						<VBox GridPane.columnIndex="0" GridPane.rowIndex="0">
+							<Label text="Signature ID" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<TextField fx:id="txtId" editable="false" style="-fx-background-color: #ecf0f1; -fx-background-radius: 5; -fx-padding: 8;" />
+						</VBox>
+
+						<VBox GridPane.columnIndex="1" GridPane.rowIndex="0">
+							<Label text="Signature Name" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<TextField fx:id="txtName" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
+						</VBox>
+
+						<!-- Row 2 -->
+						<VBox GridPane.columnIndex="0" GridPane.rowIndex="1">
+							<Label text="Template Name" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<TextField fx:id="txtDescription" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
+						</VBox>
+
+						<VBox GridPane.columnIndex="1" GridPane.rowIndex="1">
+							<Label text="Recipient Name" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<StackPane>
+								<ComboBox fx:id="cmbProduct" style="-fx-background-radius: 5; -fx-padding: 8;" prefWidth="300.0" />
+								<TextField fx:id="txtProductName" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" prefWidth="300.0" />
+							</StackPane>
+						</VBox>
+
+						<!-- Row 3 -->
+						<VBox GridPane.columnIndex="0" GridPane.rowIndex="2">
+							<Label text="Recipient Email" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<StackPane>
+								<ComboBox fx:id="cmbCategory" style="-fx-background-radius: 5; -fx-padding: 8;" prefWidth="300.0" />
+								<TextField fx:id="txtCategoryName" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" prefWidth="300.0" />
+							</StackPane>
+						</VBox>
+
+						<VBox GridPane.columnIndex="1" GridPane.rowIndex="2">
+							<Label text="Status" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<StackPane>
+								<ComboBox fx:id="cmbStatus" style="-fx-background-radius: 5; -fx-padding: 8;" prefWidth="300.0" />
+								<TextField fx:id="txtStatusName" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" prefWidth="300.0" />
+							</StackPane>
+						</VBox>
+
+						<!-- Row 4 -->
+						<VBox GridPane.columnIndex="0" GridPane.rowIndex="3">
+							<Label text="Date Sent" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<TextField fx:id="txtQuantityAvailable" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
+						</VBox>
+
+						<VBox GridPane.columnIndex="1" GridPane.rowIndex="3">
+							<Label text="Date Signed" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<StackPane>
+								<ComboBox fx:id="cmbInventory" style="-fx-background-radius: 5; -fx-padding: 8;" prefWidth="300.0" />
+								<TextField fx:id="txtInventoryName" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" prefWidth="300.0" />
+							</StackPane>
+						</VBox>
+
+						<!-- Row 5 -->
+						<VBox GridPane.columnIndex="0" GridPane.rowIndex="4" GridPane.columnSpan="2">
+							<Label text="Signature Field Type" style="-fx-font-weight: bold; -fx-text-fill: #34495e;" />
+							<TextField fx:id="txtPrice" editable="false" style="-fx-background-radius: 5; -fx-padding: 8; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
+						</VBox>
+					</GridPane>
+				</VBox>
+
+				<!-- Status Overview Card -->
+				<VBox style="-fx-background-color: white; -fx-background-radius: 10; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1), 5, 0, 0, 2);">
+					<padding>
+						<Insets bottom="20.0" left="25.0" right="25.0" top="20.0" />
+					</padding>
+
+					<Label text="Quick Stats" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #2c3e50;">
+						<VBox.margin>
+							<Insets bottom="15.0" />
+						</VBox.margin>
+					</Label>
+
+					<HBox spacing="30.0" alignment="CENTER">
+						<VBox alignment="CENTER" style="-fx-background-color: #e8f5e8; -fx-background-radius: 8; -fx-padding: 15;">
+							<Label text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #27ae60;" />
+							<Label text="Completed" style="-fx-font-size: 12px; -fx-text-fill: #27ae60;" />
+						</VBox>
+
+						<VBox alignment="CENTER" style="-fx-background-color: #fff3cd; -fx-background-radius: 8; -fx-padding: 15;">
+							<Label text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #f39c12;" />
+							<Label text="Pending" style="-fx-font-size: 12px; -fx-text-fill: #f39c12;" />
+						</VBox>
+
+						<VBox alignment="CENTER" style="-fx-background-color: #f8d7da; -fx-background-radius: 8; -fx-padding: 15;">
+							<Label text="0" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #e74c3c;" />
+							<Label text="Expired" style="-fx-font-size: 12px; -fx-text-fill: #e74c3c;" />
+						</VBox>
+					</HBox>
+				</VBox>
+			</VBox>
+		</HBox>
+	</center>
+
+	<!-- Footer -->
+	<bottom>
+		<HBox alignment="CENTER_RIGHT" spacing="10.0" style="-fx-background-color: #34495e; -fx-padding: 15;">
+			<Button fx:id="btnClose" mnemonicParsing="false" onAction="#onClose" text="Close"
+					style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20;" />
+			<Button text="Export Report"
+					style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20;" />
+			<Button text="Settings"
+					style="-fx-background-color: #9b59b6; -fx-text-fill: white; -fx-background-radius: 8; -fx-padding: 10 20;" />
+		</HBox>
+	</bottom>
+</BorderPane>

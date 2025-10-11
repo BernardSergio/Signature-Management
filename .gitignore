@@ -1,0 +1,36 @@
+# IntelliJ IDEA
+.idea/
+*.iml
+
+# Maven / Java
+target/
+.mvn/
+!.mvn/wrapper/maven-wrapper.jar
+*.class
+*.jar
+*.war
+*.ear
+
+# Logs
+*.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Environment / local settings
+.env
+
+# Gradle (if any)
+.gradle/
+build/
+
+# Local database / system files
+sbsign/db/
+*.sock
+*.index
+ib_buffer_pool
+
+# Other temporary files
+*.tmp
+*.swp

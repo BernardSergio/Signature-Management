@@ -1,0 +1,38 @@
+services:
+  signdb:
+    image: mysql:8.0
+    container_name: mysql1
+    environment:
+      MYSQL_ROOT_PASSWORD: DevPass#2025
+      MYSQL_DATABASE: signdb
+    ports:
+      - "3307:3306"
+    volumes:
+      - ./db:/var/lib/mysql
+    # - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - signnetwork
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 10
+
+  sbsign-app:
+    build: .
+    image: sbsign
+    container_name: sbsignsrvr
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://signdb:3306/signdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: DevPass#2025
+    ports:
+      - "8080:8080"
+    depends_on:
+      signdb:
+        condition: service_healthy
+    networks:
+      - signnetwork
+networks:
+  signnetwork:
+    driver: bridge

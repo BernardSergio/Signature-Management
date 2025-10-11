@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane prefHeight="500.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Sign.sergio.esigns.controller.SplashViewController">
+
+    <!-- Background GIF -->
+    <ImageView fx:id="imgHug" fitHeight="500.0" fitWidth="800.0" pickOnBounds="true" preserveRatio="true">
+        <image>
+            <Image url="@../../../images/SIGNFR.gif" />
+        </image>
+    </ImageView>
+
+    <!-- Button floating near bottom-center of GIF -->
+    <Button onAction="#onClicked" prefHeight="35" prefWidth="120" style="-fx-background-color: white; -fx-border-color: #0ab6ff;" text="Proceed &gt;&gt;&gt;" textAlignment="CENTER" translateY="-60" StackPane.alignment="BOTTOM_CENTER" />
+
+</StackPane>
